@@ -1,6 +1,6 @@
-import http from 'http';
+import http from "http";
 
-let app = require('./server').default;
+let app = require("./server").default;
 
 const server = http.createServer(app);
 
@@ -17,16 +17,16 @@ server.listen(process.env.PORT || 3000, error => {
 
 // @ts-ignore
 if (module.hot) {
-  console.log('ℹ ｢HMR｣: Server-side HMR enabled');
+  console.log("ℹ ｢HMR｣: Server-side HMR enabled");
 
   // @ts-ignore
-  module.hot.accept('./server', () => {
-    console.log('ℹ ｢HMR｣: Reloading `./server`...');
+  module.hot.accept("./server", () => {
+    console.log("ℹ ｢HMR｣: Reloading `./server`...");
 
     try {
-      app = require('./server').default;
-      server.removeListener('request', currentApp);
-      server.on('request', app);
+      app = require("./server").default;
+      server.removeListener("request", currentApp);
+      server.on("request", app);
       currentApp = app;
     } catch (error) {
       console.error(error);

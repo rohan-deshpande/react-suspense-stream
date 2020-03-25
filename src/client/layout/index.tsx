@@ -1,7 +1,16 @@
-import React, { Suspense } from 'react';
-import { useRouter, Link } from '@atlaskit/router';
+import React from "react";
+// @ts-ignore
+import { LazySuspense } from "react-loosely-lazy";
+import { useRouter, Link } from "@atlaskit/router";
 
-import { ErrorBoundary } from './error-boundary';
+import { ErrorBoundary } from "./error-boundary";
+
+const Loading = () => (
+  <div>
+    <br />
+    loading via LazySuspense fallback component...
+  </div>
+);
 
 const RouteSidebar = () => {
   const [{ route }] = useRouter();
@@ -10,11 +19,11 @@ const RouteSidebar = () => {
   return (
     <aside>
       <ErrorBoundary>
-        <Suspense fallback={'...'}>
+        <LazySuspense fallback={<Loading />}>
           {/* 
        // @ts-ignore */}
           <route.sidebar />
-        </Suspense>
+        </LazySuspense>
       </ErrorBoundary>
     </aside>
   );
@@ -25,11 +34,11 @@ const RouteComponent = () => {
   return (
     <main>
       <ErrorBoundary>
-        <Suspense fallback={'...'}>
+        <LazySuspense fallback={<Loading />}>
           {/* 
        // @ts-ignore */}
           <route.component />
-        </Suspense>
+        </LazySuspense>
       </ErrorBoundary>
     </main>
   );
